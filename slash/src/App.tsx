@@ -5,6 +5,8 @@ import Contact from './components/contact';
 import Services from './components/services';
 import Faq from './components/faq';
 import Footer from './components/footer';
+import './App.css';
+
 
 const App: React.FC = () => {
     return (
