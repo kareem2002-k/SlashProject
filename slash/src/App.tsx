@@ -1,10 +1,20 @@
 import React from 'react';
+// import {useStor}
+import NavBar from './components/navBar';
+import Contact from './components/contact';
+import Services from './components/services';
+import Faq from './components/faq';
+import Footer from './components/footer';
 
 const App: React.FC = () => {
     return (
-        <div>
-            <h1>Hello, World!</h1>
-        </div>
+        <>
+            <NavBar />
+            <Contact />
+            <Services />
+            <Faq />
+            <Footer />
+        </>
     );
 };
 
