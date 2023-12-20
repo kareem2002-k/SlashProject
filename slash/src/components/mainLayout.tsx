@@ -47,6 +47,7 @@ const MainLayout :React.FC<MainLayoutProps>= ({children}) => {
       { label: 'Products', link: '/product', isActive: false },
       { label: 'Talk to us', link: '#about', isActive: false },
       { label: 'Contact', link: '#contact', isActive: false },
+      
     ],
     onButtonClick: () => {
         navigate('/product');

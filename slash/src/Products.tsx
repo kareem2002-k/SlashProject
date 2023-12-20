@@ -15,6 +15,7 @@ const ProductDisplay: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [priceFilter, setPriceFilter] = useState({ min: 0, max: 10000 });
   const [ratingFilter, setRatingFilter] = useState({ min: 0, max: 5 });
+  const [sortOption, setSortOption] = useState<string>(''); // 'price' or 'name'
   const [isLoading, setIsloading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const ProductDisplay: React.FC = () => {
         const { data } = response.data;
         setProducts(data);
         setFilteredProducts(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
@@ -49,7 +49,22 @@ const ProductDisplay: React.FC = () => {
         product.product_rating >= ratingFilter.min &&
         product.product_rating <= ratingFilter.max
     );
+
     setFilteredProducts(filtered);
+    sortProducts(filtered);
+  };
+
+  const sortProducts = (productsToSort: Product[]) => {
+    if (sortOption === 'price') {
+      productsToSort.sort((a, b) => {
+        const priceA = a.ProductVariations[0].price;
+        const priceB = b.ProductVariations[0].price;
+        return priceA - priceB;
+      });
+    } else if (sortOption === 'name') {
+      productsToSort.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    setFilteredProducts([...productsToSort]);
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,9 +83,14 @@ const ProductDisplay: React.FC = () => {
     }));
   };
 
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(e.target.value);
+  };
+
   useEffect(() => {
     filterProducts();
-  }, [priceFilter, ratingFilter, products]);
+  }, [priceFilter, ratingFilter, products, sortOption]);
+
 
   return (
     <div className="bg-white">
@@ -160,8 +180,24 @@ const ProductDisplay: React.FC = () => {
               </>
             )}
           </Disclosure>
-      </div>
-    <div className="bg-white">
+  {/* Sorting Dropdown */}
+  <div>
+              <label htmlFor="sort" className="text-sm font-medium text-gray-900">Sort By</label>
+              <select
+                id="sort"
+                name="sort"
+                value={sortOption}
+                onChange={handleSortChange}
+                className="border rounded-md px-2 py-1 text-sm text-gray-700"
+              >
+                <option value="">-- Select --</option>
+                <option value="price">Price</option>
+                <option value="name">Name</option>
+              </select>
+            </div>
+          </div>
+        </div>
+            <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         {isLoading ? (
           <div className="flex items-center justify-center h-screen">
@@ -195,7 +231,7 @@ const ProductDisplay: React.FC = () => {
       </div>
     </div>
   </div>
-</div>
+
   );
 };
 
