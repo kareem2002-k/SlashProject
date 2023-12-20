@@ -16,7 +16,6 @@ const ProductDisplay: React.FC = () => {
   const [priceFilter, setPriceFilter] = useState({ min: 0, max: 10000 });
   const [ratingFilter, setRatingFilter] = useState({ min: 0, max: 5 });
   const [isLoading, setIsloading] = useState<boolean>(false);
-  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {

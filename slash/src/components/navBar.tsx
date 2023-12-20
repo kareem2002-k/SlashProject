@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ logoSrc, logoAlt, companyName, buttonLa
           <button
             type="button"
             onClick={onButtonClick}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-black  hover:bg-gray-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             {buttonLabel}
           </button>
@@ -67,8 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({ logoSrc, logoAlt, companyName, buttonLa
                   href={item.link}
                   className={`block py-2 px-3 ${
                     item.isActive
-                      ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500'
-                      : 'text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                      ? 'text-black bg-balck rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500'
+                      : 'text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                   }`}
                 >
                   {item.label}
