@@ -1,3 +1,7 @@
+
+
+https://github.com/kareem2002-k/SlashProject/assets/120688051/d500db40-5409-4d1b-aeee-b8c6ff29309a
+
 # Project Slash
 
 Welcome to Project Slash! This is a responsive web application built with Astro, Tailwind CSS, React, Axios, and integrated with Storyblok. This project showcases my skills in front-end development and my ability to create dynamic and visually appealing user interfaces.
