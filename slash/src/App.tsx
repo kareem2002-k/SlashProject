@@ -1,12 +1,11 @@
 import React from 'react';
-import Footer from './components/footer';
 import './App.css';
 import Hero from './components/hero';
-import Navbar from './components/navBar';
 import ECommerceTalk from './components/services';
 import Contact from './components/contact';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import MainLayout from './components/mainLayout';
 
 const App: React.FC = () => {
   
@@ -33,21 +32,7 @@ const App: React.FC = () => {
   }, []);
 
   
-  const navbarData = {
-    logoSrc: 'https://seeklogo.com/images/S/slash-logo-0435BB56F5-seeklogo.com.png',
-    logoAlt: data?.story?.content?.navSection[0]?.logoAlt,
-    companyName: data?.story?.content?.navSection[0]?.companyName, // Updated company name
-    buttonLabel: data?.story?.content?.navSection[0]?.buttonLabel, // Updated button label
-    menuItems: [
-      { label: 'Home', link: '#', isActive: true },
-      { label: 'Products', link: '#products', isActive: false },
-      { label: 'About Us', link: '#about', isActive: false },
-      { label: 'Contact', link: '#contact', isActive: false },
-    ],
-    onButtonClick: () => {
-      // Do something when the button is clicked
-    },
-  };
+  
 
 
   const featuredData = [
@@ -88,9 +73,7 @@ const App: React.FC = () => {
             </div>
           </div> :   
           <>
-      <Navbar {...navbarData} />
-      
-
+          <MainLayout>
       
       <Hero items={featuredData} />
       <ECommerceTalk
@@ -113,15 +96,7 @@ const App: React.FC = () => {
         messageLabel="Your Message"
         buttonText={data?.story?.content?.contact[0]?.buttonText}
       />
-      <Footer
-        companyName={data?.story?.content?.footer[0]?.companyName}
-        resourcesHeading={data?.story?.content?.footer[0]?.resourcesHeading}
-        followUsHeading={data?.story?.content?.footer[0]?.followUsHeading}
-        legalHeading={data?.story?.content?.footer[0]?.legalHeading}
-        privacyPolicyLink={data?.story?.content?.footer[0]?.privacyPolicyLink}
-        termsConditionsLink={data?.story?.content?.footer[0]?.termsConditionsLink}
-        rightsReservedText="Slash™ - All Rights Reserved"
-      />
+      </MainLayout>
       </>
   }
     </div>

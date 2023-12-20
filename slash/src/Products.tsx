@@ -1,8 +1,10 @@
 // ProductDisplay.tsx
 import React, { useState, useEffect } from "react";
-import type { Product } from "../types/productTypes";
-import ProductItem from "../components/productItem";
+import type { Product } from "./types/productTypes";
+import ProductItem from "./components/productItem";
 import axios from "axios";
+import './App.css';
+
 
 const ProductDisplay: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
