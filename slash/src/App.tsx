@@ -9,6 +9,7 @@ import Testimonials from './components/testomnials';
 import Navbar from './components/navBar';
 import ECommerceTalk from './components/services';
 import Contact from './components/contact';
+import ProductList from './pages/Products';
 
 const App: React.FC = () => {
   const navbarData = {
@@ -36,9 +37,17 @@ const App: React.FC = () => {
     },
   ];
 
+  React.useEffect(() => {
+    console.log('Fetching product data...');
+  }
+  );
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-full">
       <Navbar {...navbarData} />
+      <ProductList   />
+
+      {/*
       <Hero items={featuredData} />
       <ECommerceTalk
         title="Discover Style with Slash"
@@ -68,7 +77,7 @@ const App: React.FC = () => {
         privacyPolicyLink="#privacy-policy"
         termsConditionsLink="#terms-conditions"
         rightsReservedText="Slash™ - All Rights Reserved"
-      />
+      /> */}
     </div>
   );
 };
