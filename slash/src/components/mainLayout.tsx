@@ -44,8 +44,8 @@ const MainLayout :React.FC<MainLayoutProps>= ({children}) => {
     buttonLabel: data?.story?.content?.navSection[0]?.buttonLabel, // Updated button label
     menuItems: [
       { label: 'Home', link: '#', isActive: true },
-      { label: 'Products', link: '#products', isActive: false },
-      { label: 'About Us', link: '#about', isActive: false },
+      { label: 'Products', link: '/product', isActive: false },
+      { label: 'Talk to us', link: '#about', isActive: false },
       { label: 'Contact', link: '#contact', isActive: false },
     ],
     onButtonClick: () => {

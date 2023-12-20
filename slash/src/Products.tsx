@@ -4,14 +4,19 @@ import type { Product } from "./types/productTypes";
 import ProductItem from "./components/productItem";
 import axios from "axios";
 import './App.css';
+import {MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
+import {  Disclosure, Transition } from '@headlessui/react'
+
+
 
 
 const ProductDisplay: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [priceFilter, setPriceFilter] = useState({ min: 0, max: 1000 });
+  const [priceFilter, setPriceFilter] = useState({ min: 0, max: 10000 });
   const [ratingFilter, setRatingFilter] = useState({ min: 0, max: 5 });
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +28,7 @@ const ProductDisplay: React.FC = () => {
         const { data } = response.data;
         setProducts(data);
         setFilteredProducts(data);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching product data:", error);
       } finally {
@@ -69,44 +75,95 @@ const ProductDisplay: React.FC = () => {
 
   return (
     <div className="bg-white">
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+
+      {/* Filters */}
+      <Disclosure as="div" className="flex items-center space-x-4">
+            {({ open }) => (
+              <>
+                <Disclosure.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none">
+                  Filters
+                  {open ? (
+                    <MinusIcon className="ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
+                  ) : (
+                    <PlusIcon className="ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
+                  )}
+                </Disclosure.Button>
+                <Transition
+                  show={open}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Disclosure.Panel className="absolute right-0 z-10 mt-2 w-64 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="px-4 py-4 space-y-4">
+                      {/* Price Range Filter */}
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-900">Price Range</h3>
+                        <div className="flex space-x-2">
+                          {/* Min Price */}
+                          <input
+                            type="number"
+                            id="minPrice"
+                            name="min"
+                            placeholder="Min Price"
+                            value={priceFilter.min}
+                            onChange={handlePriceChange}
+                            className="border rounded-md px-2 py-1 text-sm text-gray-700 w-1/2"
+                          />
+                          {/* Max Price */}
+                          <input
+                            type="number"
+                            id="maxPrice"
+                            name="max"
+                            placeholder="Max Price"
+                            value={priceFilter.max}
+                            onChange={handlePriceChange}
+                            className="border rounded-md px-2 py-1 text-sm text-gray-700 w-1/2"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Rating Range Filter */}
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-900">Rating Range</h3>
+                        <div className="flex space-x-2">
+                          {/* Min Rating */}
+                          <input
+                            type="number"
+                            id="minRating"
+                            name="min"
+                            placeholder="Min Rating"
+                            value={ratingFilter.min}
+                            onChange={handleRatingChange}
+                            className="border rounded-md px-2 py-1 text-sm text-gray-700 w-1/2"
+                          />
+                          {/* Max Rating */}
+                          <input
+                            type="number"
+                            id="maxRating"
+                            name="max"
+                            placeholder="Max Rating"
+                            value={ratingFilter.max}
+                            onChange={handleRatingChange}
+                            className="border rounded-md px-2 py-1 text-sm text-gray-700 w-1/2"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </Disclosure.Panel>
+                </Transition>
+              </>
+            )}
+          </Disclosure>
+      </div>
+    <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h1>Product Listing</h1>
-        <div>
-          <label>
-            Price Range:
-            <input
-              type="number"
-              name="min"
-              value={priceFilter.min}
-              onChange={handlePriceChange}
-            />
-            <span> - </span>
-            <input
-              type="number"
-              name="max"
-              value={priceFilter.max}
-              onChange={handlePriceChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Rating Range:
-            <input
-              type="number"
-              name="min"
-              value={ratingFilter.min}
-              onChange={handleRatingChange}
-            />
-            <span> - </span>
-            <input
-              type="number"
-              name="max"
-              value={ratingFilter.max}
-              onChange={handleRatingChange}
-            />
-          </label>
-        </div>
         {isLoading ? (
           <div className="flex items-center justify-center h-screen">
             <div role="status">
@@ -138,6 +195,8 @@ const ProductDisplay: React.FC = () => {
         )}
       </div>
     </div>
+  </div>
+</div>
   );
 };
 

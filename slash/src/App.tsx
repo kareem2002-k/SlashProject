@@ -31,10 +31,6 @@ const App: React.FC = () => {
     fetchData();
   }, []);
 
-  
-  
-
-
   const featuredData = [
     {
       title: 'New Arrivals',
@@ -72,7 +68,6 @@ const App: React.FC = () => {
               <span className="sr-only">Loading...</span>
             </div>
           </div> :   
-          <>
           <MainLayout>
       
       <Hero items={featuredData} />
@@ -97,7 +92,6 @@ const App: React.FC = () => {
         buttonText={data?.story?.content?.contact[0]?.buttonText}
       />
       </MainLayout>
-      </>
   }
     </div>
   
